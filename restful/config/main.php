@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'restful\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        // 版本控制
+        'v1' => [
+            'class' => 'v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // 启用json输入

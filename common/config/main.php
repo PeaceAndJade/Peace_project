@@ -25,7 +25,7 @@ return [
         'i18n' => [
             'translations' => [
                 'restful*' => [
-                    'class' => 'yii\i18n\DbMessageSource',                    // table cache
+                    'class' => 'yii\i18n\DbMessageSource',              // table source
                     'sourceLanguage' => 'en-US',
                     'sourceMessageTable' => '{{%message_source}}',
                     'messageTable' => '{{%message_target}}',

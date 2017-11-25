@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace restful\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%login_log}}".
@@ -16,8 +17,10 @@ use Yii;
  * @property double $lat
  * @property double $lng
  */
+
 class LoginLogForm extends \yii\db\ActiveRecord
 {
+    public static $logData = null;
     /**
      * @inheritdoc
      */
@@ -44,15 +47,51 @@ class LoginLogForm extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'login_log_id' => 'Login Log ID',
-            'member_id' => 'Member ID',
-            'login_time' => 'Login Time',
-            'login_ip' => 'Login Ip',
-            'login_system' => 'Login System',
-            'login_browser' => 'Login Browser',
-            'lat' => 'Lat',
-            'lng' => 'Lng',
+            'login_log_id' => Yii::t('restful', 'Login Log ID'),
+            'member_id' => Yii::t('restful', 'Member ID'),
+            'login_time' => Yii::t('restful', 'Login Time'),
+            'login_ip' => Yii::t('restful', 'Login Ip'),
+            'login_system' => Yii::t('restful', 'Login System'),
+            'login_browser' => Yii::t('restful', 'Login Browser'),
+            'lat' => Yii::t('restful', 'Lat'),
+            'lng' => Yii::t('restful', 'Lng'),
         ];
+    }
+
+    /**
+     * @param $event
+     * @return bool
+     * 准备日志数据
+     */
+    static public function loginUsualLog ($event) {
+        $data = [
+            'member_id' => $event->memberId,
+            'login_time' => time(),
+            'login_ip' => ip2long(Yii::$app->request->getUserIP()),   // new Expression('inet_aton(' .  . ')'),
+        ];
+        $agents = explode(' ', Yii::$app->request->userAgent);
+        $data['login_system'] = (new LoginLogForm())->systemInfo($agents);
+        $data['login_browser'] = (new LoginLogForm())->browserInfo($agents);
+        self::$logData = $data;
+        return true;
+    }
+
+    /**
+     * 系统信息判断
+     */
+    public function systemInfo ($agents) {
+        $string = 'windows10 x64';
+
+        return $string;
+    }
+
+    /**
+     * 浏览器信息判断
+     */
+    public function browserInfo ($agents) {
+        $string = 'Chrome';
+
+        return $string;
     }
 
 }

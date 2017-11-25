@@ -6,7 +6,7 @@
  * Time: 9:27 PM
  */
 
-namespace restful\component;
+namespace restful\components;
 
 use yii\web\Controller;
 

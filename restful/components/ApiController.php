@@ -6,9 +6,10 @@
  * Time: 9:25 PM
  */
 
-namespace restful\component;
+namespace restful\components;
 
 use yii\rest\ActiveController;
+use restful\components\ReturnCode;
 
 class ApiController extends ActiveController
 {
@@ -34,10 +35,10 @@ class ApiController extends ActiveController
 
 //         返回数据结构合法性检查
         if ($result == false || !is_array($result) ||  !is_array($result[0]) || !is_numeric($result[0][0]) || $result[0][1] === null ||  !is_array($result[1]) || !is_bool($result[2]))
-            $data = ['code' => ReturnCode::$data_1[0], 'message' => ReturnCode::$data_1[1], 'contents' => [], 'more' => false];
+            $data = ['code' => ReturnCode::$data_1[0], 'message' => ReturnCode::$data_1[1], 'contents' => (object)[], 'more' => false];
         // $result说明：基本结构如下 [['code', 'message'], 'contents', 'more']
         else
-            $data = ['code' => $result[0][0], 'message' => $result[0][1], 'contents' => $result[1], 'more' => $result[2]];
+            $data = ['code' => $result[0][0], 'message' => $result[0][1], 'contents' => (object)$result[1], 'more' => $result[2]];
 
         return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }

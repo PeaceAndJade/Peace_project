@@ -141,12 +141,12 @@ class DbMessageSource extends MessageSource
      */
     protected function loadMessagesFromDb($category, $language)
     {
-        $mainQuery = (new Query())->select(['message' => 't1.message', 'translation' => 't2.translation'])
+        $mainQuery = (new Query())->select(['message' => 't1.source_message', 'translation' => 't2.translation'])
             ->from(['t1' => $this->sourceMessageTable, 't2' => $this->messageTable])
             ->where([
-                't1.id' => new Expression('[[t2.id]]'),
+                't1.message_source_id' => new Expression('[[t2.message_source_id]]'),
                 't1.category' => $category,
-                't2.language' => $language,
+                't2.target_language' => $language,
             ]);
 
         $fallbackLanguage = substr($language, 0, 2);
@@ -176,14 +176,14 @@ class DbMessageSource extends MessageSource
      */
     protected function createFallbackQuery($category, $language, $fallbackLanguage)
     {
-        return (new Query())->select(['message' => 't1.message', 'translation' => 't2.translation'])
+        return (new Query())->select(['message' => 't1.source_message', 'translation' => 't2.translation'])
             ->from(['t1' => $this->sourceMessageTable, 't2' => $this->messageTable])
             ->where([
-                't1.id' => new Expression('[[t2.id]]'),
+                't1.message_source_id' => new Expression('[[t2.message_source_id]]'),
                 't1.category' => $category,
-                't2.language' => $fallbackLanguage,
+                't2.target_language' => $fallbackLanguage,
             ])->andWhere([
-                'NOT IN', 't2.id', (new Query())->select('[[id]]')->from($this->messageTable)->where(['language' => $language]),
+                'NOT IN', 't2.message_source_id', (new Query())->select('[[message_source_id]]')->from($this->messageTable)->where(['target_language' => $language]),
             ]);
     }
 }

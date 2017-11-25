@@ -52,20 +52,20 @@ class MemberForm extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'member_id' => 'Member ID',
-            'country_id' => 'Country ID',
-            'member_name' => 'Member Name',
-            'password' => 'Password',
-            'api_token' => 'Api Token',
-            'telephone' => 'Telephone',
-            'email' => 'Email',
-            'portrait' => 'Portrait',
-            'sex' => 'Sex',
-            'info_deep' => 'Info Deep',
-            'create_time' => 'Create Time',
-            'update_time' => 'Update Time',
-            'locked' => 'Locked',
-            'closed' => 'Closed',
+            'member_id' => Yii::t('restful', 'Member ID'),
+            'country_id' => Yii::t('restful', 'Country ID'),
+            'member_name' => Yii::t('restful', 'Member Name'),
+            'password' => Yii::t('restful', 'Password'),
+            'api_token' => Yii::t('restful', 'Api Token'),
+            'telephone' => Yii::t('restful', 'Telephone'),
+            'email' => Yii::t('restful', 'Email'),
+            'portrait' => Yii::t('restful', 'Portrait'),
+            'sex' => Yii::t('restful', 'Sex'),
+            'info_deep' => Yii::t('restful', 'Info Deep'),
+            'create_time' => Yii::t('restful', 'Create Time'),
+            'update_time' => Yii::t('restful', 'Update Time'),
+            'locked' => Yii::t('restful', 'Locked'),
+            'closed' => Yii::t('restful', 'Closed'),
         ];
     }
 }

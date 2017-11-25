@@ -36,6 +36,17 @@ console
     migrations/          contains database migrations
     models/              contains console-specific model classes
     runtime/             contains files generated during runtime
+restful
+    assets/              contains application assets such as JavaScript and CSS
+    component/           contains special files,public class and so on
+    config/              contains backend configurations
+    controllers/         contains Web controller classes
+    events/              contains event parameters passed
+    models/              contains backend-specific model classes
+    runtime/             contains files generated during runtime
+    tests/               contains tests for backend application    
+    views/               contains view files for the Web application
+    web/                 contains the entry script and Web resources
 backend
     assets/              contains application assets such as JavaScript and CSS
     config/              contains backend configurations
@@ -56,6 +67,10 @@ frontend
     web/                 contains the entry script and Web resources
     widgets/             contains frontend widgets
 vendor/                  contains dependent 3rd-party packages
+    yiisoft/             contains dependent 3rd-party packages
+        yii2-redis/      contains redis connection,session and cache
+        .../             contains others
+    .../                 contains others
 environments/            contains environment-based overrides
 ```
 # Peace_project
